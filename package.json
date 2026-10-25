@@ -1,0 +1,23 @@
+{
+  "name": "isochrone-explorer",
+  "version": "0.1.0",
+  "description": "等时圈查询与统计工具（基于 ni1o1/amapreachcircle 二次开发，MIT）",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "dev:lan": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview",
+    "preview:lan": "vite preview --host 0.0.0.0",
+    "build:data": "node scripts/build-data.mjs"
+  },
+  "devDependencies": {
+    "typescript": "^5.6.0",
+    "vite": "^5.4.0"
+  },
+  "dependencies": {
+    "@turf/turf": "^7.1.0",
+    "mapbox-gl": "^3.8.0"
+  }
+}

@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no, width=device-width" />
+    <title>等时圈查询与统计</title>
+    <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/v3.8.0/mapbox-gl.css" />
+</head>
+
+<body>
+    <div id="app">
+        <div id="map"></div>
+
+        <div id="panel">
+            <h1>等时圈查询与统计</h1>
+            <p class="subtitle">基于 ni1o1/amapreachcircle 二次开发 · Mapbox 等时圈</p>
+
+            <div class="field">
+                <label for="lnglat">出发位置（经度, 纬度 · WGS84）</label>
+                <div class="row">
+                    <input id="lnglat" type="text" value="121.4737, 31.2304" placeholder="点击地图选点" />
+                    <button id="btn-locate" class="btn" title="使用浏览器定位">定位</button>
+                </div>
+            </div>
+
+            <div class="field">
+                <label>出行方式</label>
+                <div id="modes" class="modes"></div>
+            </div>
+
+            <div class="field">
+                <label>等时档位（分钟）</label>
+                <div id="contours" class="chips selected-chips"></div>
+                <div id="presets" class="chips presets"></div>
+                <div class="slider-wrap">
+                    <input id="custom-minutes" class="slider" type="range" min="1" max="60" step="1" value="30" />
+                    <div class="slider-scale">
+                        <span>1</span><span>15</span><span>30</span><span>45</span><span>60</span>
+                    </div>
+                </div>
+                <div class="row custom-row">
+                    <span class="slider-readout">自定义：<strong id="custom-minutes-value">30</strong> 分钟</span>
+                    <button id="btn-add-contour" class="btn">添加档位</button>
+                </div>
+                <p class="field-hint">拖动拉杆选择 1~60 分钟（最多 8 档）。60 分钟为 Mapbox API 上限。</p>
+            </div>
+
+            <div class="actions">
+                <button id="btn-search" class="btn primary">查询</button>
+                <button id="btn-clear" class="btn">清除</button>
+                <button id="btn-export" class="btn" disabled>导出 GeoJSON</button>
+            </div>
+
+            <div id="status" class="status"></div>
+
+            <div id="stats" class="stats hidden">
+                <h2>统计</h2>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>档位</th>
+                            <th>面积 (km²)</th>
+                            <th>覆盖人口*</th>
+                            <th>密度 (人/km²)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="stats-body"></tbody>
+                </table>
+                <p id="stats-note" class="note">*人口为七普区县级数据按面积加权估算，仅供参考。</p>
+            </div>
+
+            <p class="footnote">中心点可直接拖拽 · 拖拽结束自动重查</p>
+        </div>
+
+        <div id="legend" class="legend hidden"></div>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+</body>
+
+</html>

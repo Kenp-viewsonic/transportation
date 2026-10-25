@@ -1,0 +1,8 @@
+node_modules
+dist
+.env.local
+*.local
+.DS_Store
+
+# 人口数据原始文件较大（~9MB），不入库；由 scripts/build-data.mjs 下载/生成
+scripts/pop-census.csv
